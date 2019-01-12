@@ -29,5 +29,34 @@ public class MainActivityTest {
         onView(withId(R.id.btnAdd)).perform(click());
         onView(withId(R.id.tvResult)).check(matches(withText("4.0 plus 4.0 gives value 8.0")));
        }
+
+    @Test
+    public void testSumNull(){
+        onView(withId(R.id.etNum1)).perform(click()).perform(typeText("4"));
+        onView(withId(R.id.etNum2)).perform(click()).perform(typeText(""));
+        onView(withId(R.id.btnAdd)).perform(click());
+        onView(withId(R.id.tvResult)).check(matches(withText("Enter some data to calculate")));
+    }
+
+
+
+    //Testy dzielenie
+
+
+    @Test
+    public void testDivideZero(){
+        onView(withId(R.id.etNum1)).perform(click()).perform(typeText("4"));
+        onView(withId(R.id.etNum2)).perform(click()).perform(typeText("0"));
+        onView(withId(R.id.btnAdd)).perform(click());
+        onView(withId(R.id.tvResult)).check(matches(withText("4.0 divided by 0.0 gives value infinity")));
+    }
+
+    @Test
+    public void testDivideZero2(){
+        onView(withId(R.id.etNum1)).perform(click()).perform(typeText("4"));
+        onView(withId(R.id.etNum2)).perform(click()).perform(typeText("0"));
+        onView(withId(R.id.btnAdd)).perform(click());
+        onView(withId(R.id.tvResult)).check(matches(withText("0.0 divided by 0.0 gives value NaN")));
+    }
 }
 

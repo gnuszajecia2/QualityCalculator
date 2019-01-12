@@ -38,11 +38,6 @@ public class CalculationsTest {
         assertEquals(200, calculationsUnderTest.calculate(Operation.MULTIPLY, 40, 5), 0.01);
     }
 
-    @Test
-    public void testNULL() throws Exception {
-        assertEquals("Unknown operation", 40, 5), 0.01);
-    }
-
     @After
     public void tearDown() {
     }
