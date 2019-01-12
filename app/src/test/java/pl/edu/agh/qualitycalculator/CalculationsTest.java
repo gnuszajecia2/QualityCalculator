@@ -9,6 +9,10 @@ import static junit.framework.Assert.assertEquals;
 public class CalculationsTest {
     Calculations calculationsUnderTest;
 
+
+    //Test operacji matematycznych
+
+
     @Before
     public void setUp() {
         calculationsUnderTest = new Calculations();
@@ -19,7 +23,28 @@ public class CalculationsTest {
         assertEquals(5, calculationsUnderTest.calculate(Operation.SUM, 2, 3), 0.01);
     }
 
+    @Test
+    public void testSUBTRACT() throws Exception {
+        assertEquals(20, calculationsUnderTest.calculate(Operation.SUBTRACT, 25, 5), 0.01);
+    }
+
+    @Test
+    public void testDIVIDE() throws Exception {
+        assertEquals(4, calculationsUnderTest.calculate(Operation.DIVIDE, 20, 5), 0.01);
+    }
+
+    @Test
+    public void testMULTIPLY() throws Exception {
+        assertEquals(200, calculationsUnderTest.calculate(Operation.MULTIPLY, 40, 5), 0.01);
+    }
+
+    @Test
+    public void testNULL() throws Exception {
+        assertEquals("Unknown operation", 40, 5), 0.01);
+    }
+
     @After
     public void tearDown() {
     }
+
 }
