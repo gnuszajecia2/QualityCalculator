@@ -14,11 +14,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     EditText etNum1;
     EditText etNum2;
+    EditText etNum3;
 
     Button btnAdd;
     Button btnSub;
     Button btnMult;
     Button btnDiv;
+    Button btnAvg;
 
     TextView tvResult;
 
@@ -32,11 +34,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
         etNum1 = (EditText) findViewById(R.id.etNum1);
         etNum2 = (EditText) findViewById(R.id.etNum2);
+        etNum2 = (EditText) findViewById(R.id.etNum3);
 
         btnAdd = (Button) findViewById(R.id.btnAdd);
         btnSub = (Button) findViewById(R.id.btnSub);
         btnMult = (Button) findViewById(R.id.btnMult);
         btnDiv = (Button) findViewById(R.id.btnDiv);
+        btnAvg = (Button) findViewById(R.id.btnAvg);
 
         tvResult = (TextView) findViewById(R.id.tvResult);
 
@@ -44,6 +48,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         btnSub.setOnClickListener(this);
         btnMult.setOnClickListener(this);
         btnDiv.setOnClickListener(this);
+        btnAvg.setOnClickListener(this);
     }
 
     @Override
@@ -68,6 +73,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
             case R.id.btnDiv:
                 selectedOperation = Operation.DIVIDE;
                 break;
+            case R.id.btnAvg:
+                selectedOperation = Operation.AVERAGE;
+                break;
             default:
                 break;
         }
@@ -81,7 +89,37 @@ public class MainActivity extends Activity implements View.OnClickListener {
         }
         catch (Exception ex) {
             tvResult.setText("An error ocurred: " + ex.toString());
-        };
+        }
+
+
+        // Sprawdzenie czy wszystkie trzy pola są uzupełnione, jeśli nie to wyświetlany komunikat o uzupełnienie dancyh
+
+
+        float num3 = 0;
+        if (selectedOperation == Operation.AVERAGE) {
+            if (TextUtils.isEmpty(etNum3.getText().toString()))
+            {
+                tvResult.setText("Populate all three fields to calculate average");
+                return;
+            }
+            else {
+                num3 = Float.parseFloat(etNum3.getText().toString());
+            }}
+
+
+        try {
+            float result = calculations.calculate(selectedOperation, num1, num2, num3);
+            if (selectedOperation == Operation.AVERAGE) {
+                String verbalizedOperation = verbalizer.verbalize(selectedOperation, num1, num2, num3, result);
+                tvResult.setText(verbalizedOperation);
+            }
+            else {
+                String verbalizedOperation = verbalizer.verbalize(selectedOperation, num1, num2, result);
+                tvResult.setText(verbalizedOperation);
+            }}
+        catch (Exception ex) {
+            tvResult.setText("An error occurred: " + ex.toString());
+        }
 
     }
 }

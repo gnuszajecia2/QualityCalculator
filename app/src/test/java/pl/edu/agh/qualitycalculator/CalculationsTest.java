@@ -38,8 +38,14 @@ public class CalculationsTest {
         assertEquals(200, calculationsUnderTest.calculate(Operation.MULTIPLY, 40, 5), 0.01);
     }
 
+    @Test
+    public void testAverage() throws Exception {
+        assertEquals(10, calculationsUnderTest.calculate(Operation.AVERAGE, 5, 10, 15), 0.01);
+    }
+
     @After
     public void tearDown() {
     }
+
 
 }
